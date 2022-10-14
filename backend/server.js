@@ -6,7 +6,7 @@ const loginRouter = require('./routes/login.js');
 const app = express();
 const cors = require('cors');
 const getDataRouter = require('./routes/getData.js');
-const todoRouter = require('./routes/addTodo.js');
+const todoRouter = require('./routes/todo.js');
 dotenv.config({ path: './.env' });
 const port = process.env.PORT;
 

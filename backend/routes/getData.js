@@ -20,10 +20,11 @@ async function checkUserAccessTokenKey(req, res, next) {
                 req.user = userData;
                 next();
 
+            }else{
+              res.status(400).json({err:'error'})
             }
         });
     } catch (error) {
-        
     }
 }
 module.exports = getDataRouter;
