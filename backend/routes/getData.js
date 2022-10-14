@@ -13,7 +13,6 @@ getDataRouter.get("/", checkUserAccessTokenKey, async(req, res) => {
 async function checkUserAccessTokenKey(req, res, next) {
     try {
       const accessToken = req.headers.accesstoken;
-      console.log(accessToken)
         jwt.verify(accessToken, process.env.ACCESS_TOKEN_KEY, async(err, user) => {
             if (user) {
                 const userData = await model.findOne({ email: user.email });

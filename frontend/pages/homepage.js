@@ -48,7 +48,8 @@ const HomePage = () => {
         if (res) {
           if (res.data.status === true) {
             setIsLoading(false);
-            setIsAgainGetData(prev => !prev)
+            setIsAgainGetData(prev => !prev);
+            userInputRef.current.value = ""
           }
         }
       })
@@ -74,7 +75,8 @@ const HomePage = () => {
         if (res) {
           if (res.data.status === true) {
             setIsLoading(false);
-            setIsAgainGetData(prev => !prev)
+            setIsAgainGetData(prev => !prev);
+            
           }
         }
       } )
@@ -94,7 +96,6 @@ const HomePage = () => {
       <div style={{ width: 'auto', height: `100px`, overflow: 'scroll' }}>
         {todos.length > 0
           ? todos.map((todo, i) => {
-            console.log(i,todo)
             return <div style={{ display: 'flex', width: `50%`, justifyContent: 'space-around' }} key={todo + i}>
               {todo}
               <button onClick={() => deleteTodo(todo,i)}>ХАСАХ</button>
