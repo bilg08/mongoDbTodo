@@ -6,7 +6,28 @@ const HomePage = () => {
   const userInputRef = useRef()
   const [isAgainGetData, setIsAgainGetData] = useState(false);
   const router = useRouter()
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+
+  axios.interceptors.request.use(
+    function (config) {
+      setIsLoading(true)
+      return config;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
+
+  axios.interceptors.response.use(
+    function (response) {
+      setIsLoading(false);
+      return response;
+    },
+    function (error) {
+
+      return Promise.reject(error);
+    }
+  );
   useEffect(() => {
     async function handleGetDatasFromServer() {
       try {
@@ -37,7 +58,6 @@ const HomePage = () => {
 
   async function handleAddTodo() {
     const todo = userInputRef.current.value;
-    setIsLoading(true)
     try {
       const accesstoken = localStorage.getItem("accessToken");
       await axios.post("http://localhost:8000/todos/addTodo", { todo }, {
@@ -47,7 +67,6 @@ const HomePage = () => {
       }).then((res) => {
         if (res) {
           if (res.data.status === true) {
-            setIsLoading(false);
             setIsAgainGetData(prev => !prev);
             userInputRef.current.value = ""
           }
@@ -74,9 +93,7 @@ const HomePage = () => {
       ).then(res=> {
         if (res) {
           if (res.data.status === true) {
-            setIsLoading(false);
-            setIsAgainGetData(prev => !prev);
-            
+            setIsAgainGetData(prev => !prev);            
           }
         }
       } )

@@ -18,15 +18,9 @@ todoRouter.post("/addTodo", checkUserAccessTokenKey, async(req, res) => {
 
 })
 .delete("/deleteTodo/:id", checkUserAccessTokenKey, async(req, res) => {
-  // console.log(req.params.todo,'todd')
   const { id } = req.params;
-  console.log(id)
   const {todos} = req.user;
-  // todos.splice(id,1);
-  
- 
-
- 
+   
   try {
    await model.find( req.user ).updateOne({todos:todos.filter((todoItem,index) => {
     return index!=id

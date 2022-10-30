@@ -8,7 +8,6 @@ loginRouter.post("",checkUserAccessTokenKey, checkAndLoginUser);
 
 function checkUserAccessTokenKey(req,res,next) {
     const authHeader = req.headers;
-    console.log(authHeader, "authHeader");
     next()
 }
 module.exports = loginRouter;
